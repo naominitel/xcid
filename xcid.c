@@ -7,7 +7,7 @@
 
 int main(int argc, const char *argv[]) {
     Display *dpy;
-    Window w;
+    Window w, root;
 
     (void)argc;
     (void)argv;
@@ -16,6 +16,9 @@ int main(int argc, const char *argv[]) {
     if (!dpy)
       exit(EXIT_FAILURE);
     XGetInputFocus(dpy, &w, (int[1]){});
+    root = XDefaultRootWindow(dpy);
+    if(root == focuswin)
+      return EXIT_FAILURE;
 
     printf("%lu\n", w);
     return EXIT_SUCCESS;
